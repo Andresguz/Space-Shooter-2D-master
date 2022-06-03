@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class SpawnManager : MonoBehaviour
+using Mirror;
+public class SpawnManager : NetworkBehaviour
 {
     [SerializeField]
     private GameObject _enemyPrefab;

@@ -856,6 +856,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1088621238}
   - component: {fileID: 1088621239}
+  - component: {fileID: 1088621240}
   m_Layer: 0
   m_Name: Spawn_Manager
   m_TagString: Untagged
@@ -890,6 +891,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 056127786d82cd347a99c2695b0b351a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _enemyPrefab: {fileID: 5356010465544857824, guid: 58ec80f9d9954ed4bac86d8b8a10bfef,
     type: 3}
   _enemyContainer: {fileID: 1988794873}
@@ -899,6 +902,23 @@ MonoBehaviour:
   - {fileID: 7371882389991815071, guid: 37bcea6c0eab552498f06263f3badd50, type: 3}
   - {fileID: 4798337593830453911, guid: 2d1d399f4abce8b40bf65d49816ea8d8, type: 3}
   - {fileID: 7579804754127390414, guid: f995d2cfd1cf48b4ab98eb30a8d187b0, type: 3}
+--- !u!114 &1088621240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088621237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 1199962161
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &1145717428
 GameObject:
   m_ObjectHideFlags: 0

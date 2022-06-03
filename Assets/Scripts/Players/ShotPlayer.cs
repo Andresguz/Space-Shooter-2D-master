@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ShotPlayer : NetworkBehaviour
 {
@@ -14,6 +15,7 @@ public class ShotPlayer : NetworkBehaviour
     public float firerate = 0.5f;
     [SyncVar] public int health = 4;
     TextMesh textHealt;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,21 +40,39 @@ public class ShotPlayer : NetworkBehaviour
             }
         }
     }
+
+    [ClientRpc]
+    void RpcShoot()
+    {
+        anim.SetTrigger("shoot");
+    }
+
+    [TargetRpc]
+    void TargetLoadGameOver()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     [Command]
     void Shoot()
     {
         GameObject projectile = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         NetworkServer.Spawn(projectile);
+        RpcShoot();
     }
 
     [ServerCallback]
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<LaserShot>() != null)
+        if (other.gameObject.CompareTag("Enemy"))
         {
-           /// --health;
+            --health;
             if (health == 0)
+            {
+                TargetLoadGameOver();
                 NetworkServer.Destroy(gameObject);
+
+            }
         }
     }
 }

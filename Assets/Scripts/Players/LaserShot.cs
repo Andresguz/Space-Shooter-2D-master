@@ -8,28 +8,31 @@ public class LaserShot : NetworkBehaviour
     public float bulletLife = 3;
     public int damage = 40;
     public Rigidbody2D rb;
-   // public GameObject impactEffect;
+    public GameObject impactEffect;
 
-    // Use this for initialization
     void Start()
     {
         rb.velocity = transform.up * speed;
+
     }
 
-    /*void Update()
-    {
-        Destroy(gameObject, bulletLife);
-    }*/
+   
     [Server]
     void DestroySelf()
     {
-        //NetworkServer.Destroy(gameObject);
+        NetworkServer.Destroy(gameObject);
     }
     public override void OnStartServer()
     {
-        Invoke(nameof(DestroySelf), bulletLife);
+        //Invoke(nameof(DestroySelf), bulletLife);
     }
-
+    private void Update()
+    {
+        if (transform.position.y > 7.5f)
+        {
+            DestroySelf();
+        }
+    }
     [ServerCallback]
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
@@ -38,13 +41,7 @@ public class LaserShot : NetworkBehaviour
             NetworkServer.Destroy(hitInfo.gameObject);
         }
        // NetworkServer.Destroy(gameObject);
-        /* EnemyGuy enemy = hitInfo.GetComponent<EnemyGuy>();
-         if (enemy != null)
-         {
-             enemy.TakeDamage(damage);
-             Instantiate(impactEffect, transform.position, transform.rotation);
-             Destroy(gameObject);
-         }*/
+      
     }
     [ServerCallback]
     void OnCollisionEnter2D(Collision2D collision)
@@ -52,7 +49,7 @@ public class LaserShot : NetworkBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             NetworkServer.Destroy(collision.gameObject);
-
+            DestroySelf();
         }
         //NetworkServer.Destroy(gameObject);
         /*  if (collision.transform.tag == "wall")

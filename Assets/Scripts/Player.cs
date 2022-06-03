@@ -11,8 +11,7 @@ public class Player : NetworkBehaviour
     
     private int _lives = 3;
    
-    public int _score;
- 
+   //
    // private UIManager _uiManager;
 
 
