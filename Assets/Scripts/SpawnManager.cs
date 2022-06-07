@@ -15,8 +15,9 @@ public class SpawnManager : NetworkBehaviour
     
 
     private bool _stopSpawning = false;
-    private void Start()
+    public override void OnStartServer()
     {
+        base.OnStartServer();
         StartSpawning();
     }
     public void StartSpawning()

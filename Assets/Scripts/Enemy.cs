@@ -12,9 +12,10 @@ public class Enemy : NetworkBehaviour
     //  private AudioSource _explSrc;
     // private bool _isHit = false;
 
-    public override void OnStartServer()
+    public void Start()
     {
-        base.OnStartServer();
+
+       // base.OnStartServer();
         //  _explSrc = GetComponent<AudioSource>();
         transform.position = new Vector3(Random.Range(-8.0f, 8.0f), 7.5f, 0);
        // _player = GameObject.Find("Player").GetComponent<Player>();        
@@ -31,7 +32,7 @@ public class Enemy : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
+ //   [ClientRpc]
      void DeadExplosion()
     {
         Debug.Log("eer");

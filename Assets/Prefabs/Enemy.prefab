@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5746721019169571850}
   - component: {fileID: 82279568685006938}
   - component: {fileID: 4653123080419269160}
-  - component: {fileID: 6060022827571906731}
+  - component: {fileID: 7020254187193909816}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -284,7 +284,7 @@ MonoBehaviour:
   visible: 1
   m_AssetId: 58ec80f9d9954ed4bac86d8b8a10bfef
   hasSpawned: 0
---- !u!114 &6060022827571906731
+--- !u!114 &7020254187193909816
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
