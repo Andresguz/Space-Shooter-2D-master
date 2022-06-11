@@ -8,6 +8,8 @@ TagManager:
   - Laser
   - Player2
   - Laser2
+  - score1
+  - score0
   layers:
   - Default
   - TransparentFX

@@ -143,7 +143,7 @@ public class PlayerMovement : NetworkBehaviour
 
         _lives--;
 
-        _uiManager.UpdateLives(_lives);
+     //  _uiManager.UpdateLives(_lives);
 
         if (_lives == 2)
         {

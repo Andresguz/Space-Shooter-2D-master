@@ -9,10 +9,12 @@ public class LaserShot : NetworkBehaviour
     public int damage = 40;
     public Rigidbody2D rb;
     public GameObject impactEffect;
+  //  private GameManager game;
 
     void Start()
     {
         rb.velocity = transform.up * speed;
+     //  game= GameObject.Find("Game_Manager").GetComponent<GameManager>();
 
     }
 
@@ -48,6 +50,10 @@ public class LaserShot : NetworkBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            //    game.score++;
+            // GameManager.instance.score++;
+        //GameObject hitD=   Instantiate(impactEffect, collision.gameObject.transform);
+        //    NetworkServer.Spawn(hitD);
             NetworkServer.Destroy(collision.gameObject);
             DestroySelf();
         }

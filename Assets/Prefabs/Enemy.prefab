@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5746721019169571850}
   - component: {fileID: 82279568685006938}
   - component: {fileID: 4653123080419269160}
-  - component: {fileID: 7020254187193909816}
+  - component: {fileID: 7393844647242343651}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -54,6 +54,9 @@ MonoBehaviour:
   syncInterval: 0.1
   _enemySpeed: 4
   _animator: {fileID: 5746721019169571850}
+  hitPrefab: {fileID: 8443315704496310910, guid: 6ef35fa36e3a65043b2d800600204bdd,
+    type: 3}
+  hitTransform: {fileID: 5356010465544857852}
 --- !u!212 &2495256973003232676
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -124,7 +127,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &61551305636096382
 BoxCollider2D:
@@ -281,10 +284,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 0
   serverOnly: 0
-  visible: 1
+  visible: 0
   m_AssetId: 58ec80f9d9954ed4bac86d8b8a10bfef
   hasSpawned: 0
---- !u!114 &7020254187193909816
+--- !u!114 &7393844647242343651
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

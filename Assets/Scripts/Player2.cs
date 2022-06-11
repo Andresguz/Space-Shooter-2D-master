@@ -163,7 +163,7 @@ public class Player2 : NetworkBehaviour
 
         _lives--;
 
-        _uiManager.UpdateLives2(_lives);
+       // _uiManager.UpdateLives2(_lives);
 
         if (_lives == 2)
         {
@@ -216,7 +216,7 @@ public class Player2 : NetworkBehaviour
     public void AddScore2(int points)
     {
         _score2 += points;
-        _uiManager.UpdateScore2(_score2);
+      //  _uiManager.UpdateScore2(_score2);
     }
 
 }

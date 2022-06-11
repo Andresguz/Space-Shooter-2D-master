@@ -13,20 +13,23 @@ public class ShotPlayer : NetworkBehaviour
     public GameObject helth;
     public bool isInGame = false;
     public float firerate = 0.5f;
-    [SyncVar] public int health = 4;
+    [SyncVar] public int health = 100;
     TextMesh textHealt;
     public Animator anim;
+    public Slider valor;
     // Start is called before the first frame update
     void Start()
     {
-        textHealt = helth.GetComponent<TextMesh>();
+     //textHealt = helth.GetComponent<TextMesh>();
 
     }
 
     // Update is called once per frame
+    [ClientRpc]
     void Update()
     {
-        textHealt.text = health.ToString();
+        valor.value = health;
+      //  textHealt.text = health.ToString();
         if (isLocalPlayer)
         {
             if (isInGame)
@@ -66,7 +69,7 @@ public class ShotPlayer : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            --health;
+            health-=10;
             if (health == 0)
             {
                 TargetLoadGameOver();

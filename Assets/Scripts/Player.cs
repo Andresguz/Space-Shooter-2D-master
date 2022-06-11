@@ -2,38 +2,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : NetworkBehaviour
 {
     private float _speed;
-    [SerializeField]
- 
-    
-    private int _lives = 3;
-   
-   //
-   // private UIManager _uiManager;
+   [SyncVar] public int ScoreP;
+    public int numPlayer;
 
 
     void Start()
     {
  
-       // transform.position = new Vector3(0, 0, 0);
-        //_uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-     
-        //if (_uiManager == null)
-        //{
-        //    Debug.LogError("UI Manager is null!");
-        //}
        
         
     }
-
+    [ClientRpc]
+  public void scoreSearch()
+    {
+        GameObject sc = GameObject.FindGameObjectWithTag("score0");
+        sc.GetComponent<Text>().text = ScoreP.ToString();
+    }
+    [ServerCallback]
+    public void addScore()
+    {
+        ScoreP++;
+    }
     void Update()
     {
         ShipMovement();
         Boundaries();
-   
+        scoreSearch();
+        if (Input.GetButtonDown("Fire1") )
+        {
+      //   addScore();
+        }
+  
 
     }
 

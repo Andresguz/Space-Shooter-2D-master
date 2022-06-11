@@ -3,22 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
-{
-    [SerializeField]
-    public bool _isGameOver;
 
+using Mirror;
+public class GameManager : NetworkBehaviour
+{
+    public static GameManager instance;
+  //  public int score;
+  //  public Text scoreText;
+    //[SerializeField]
+    //public bool _isGameOver;
+
+    private void Start()
+    {
+      //  scoreText.text=score.ToString(); 
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && _isGameOver == true)
-        {
-            SceneManager.LoadScene(1); //Current Game Scene
-        }
+       // scoreText.text = score.ToString();
+        //    if (Input.GetKeyDown(KeyCode.R) && _isGameOver == true)
+        //    {
+        //        SceneManager.LoadScene(1); //Current Game Scene
+        //    }
     }
 
-    public void GameOver()
-    {
-        _isGameOver = true;
-    }
+    //public void GameOver()
+    //{
+    //    _isGameOver = true;
+    //}
 
 }
