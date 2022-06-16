@@ -17,6 +17,9 @@ public class ShotPlayer : NetworkBehaviour
     TextMesh textHealt;
     public Animator anim;
     public Slider valor;
+    public GameObject hit;
+
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +27,20 @@ public class ShotPlayer : NetworkBehaviour
 
     }
 
+    //[ClientRpc]
+    //void RpcUpdateScoreCanvas(int s)
+    //{
+    //    GameObject t = GameObject.FindGameObjectWithTag("score0");
+    //    t.GetComponent<Text>().text = s.ToString();
+    //}
     // Update is called once per frame
+
+    //[Server]
+    //public void addScore()
+    //{
+    //    score++;
+    //    RpcUpdateScoreCanvas(score);
+    //}
     [ClientRpc]
     void Update()
     {
@@ -48,14 +64,22 @@ public class ShotPlayer : NetworkBehaviour
     void RpcShoot()
     {
         anim.SetTrigger("shoot");
+        GameObject hitefect = Instantiate(hit, gameObject.transform);
+        NetworkServer.Spawn(hitefect);
     }
 
+    [ClientRpc]
+    void efect()
+    {
+        GameObject hitefect = Instantiate(hit, gameObject.transform);
+        NetworkServer.Spawn(hitefect);
+    }
     [TargetRpc]
     void TargetLoadGameOver()
     {
         SceneManager.LoadScene(0);
     }
-
+ 
     [Command]
     void Shoot()
     {
@@ -63,6 +87,7 @@ public class ShotPlayer : NetworkBehaviour
         NetworkServer.Spawn(projectile);
         RpcShoot();
     }
+
 
     [ServerCallback]
     void OnTriggerEnter2D(Collider2D other)
@@ -72,6 +97,7 @@ public class ShotPlayer : NetworkBehaviour
             health-=10;
             if (health == 0)
             {
+                efect();
                 TargetLoadGameOver();
                 NetworkServer.Destroy(gameObject);
 

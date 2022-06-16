@@ -18,7 +18,7 @@ public class network : NetworkManager
     {
         Transform start = numPlayers == 0 ? leftRacketSpawn : rightRacketSpawn;
         GameObject player = Instantiate(playerPrefab, start.position, start.rotation);
-        // player.GetComponent<Player>().numPlayer = numPlayers;
+        player.GetComponent<Player>().numPlayer = numPlayers;
         NetworkServer.AddPlayerForConnection(conn, player);
 
         if (numPlayers == 2)

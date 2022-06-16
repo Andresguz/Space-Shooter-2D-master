@@ -2,6 +2,7 @@ using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class LaserShot : NetworkBehaviour
 {
     public float speed = 20f;
@@ -9,12 +10,14 @@ public class LaserShot : NetworkBehaviour
     public int damage = 40;
     public Rigidbody2D rb;
     public GameObject impactEffect;
-  //  private GameManager game;
+    public GameObject adds;
+    //  private GameManager game;
 
-    void Start()
+    public override void OnStartServer()
     {
+        base.OnStartServer();
+        
         rb.velocity = transform.up * speed;
-     //  game= GameObject.Find("Game_Manager").GetComponent<GameManager>();
 
     }
 
@@ -24,9 +27,14 @@ public class LaserShot : NetworkBehaviour
     {
         NetworkServer.Destroy(gameObject);
     }
-    public override void OnStartServer()
+   
+    [ClientRpc]
+    void DeadExplosion()
     {
-        //Invoke(nameof(DestroySelf), bulletLife);
+
+        // _animator.SetBool("f",true); //trigger anim 
+        GameObject hitD = Instantiate(impactEffect, gameObject.transform);
+        NetworkServer.Spawn(hitD);
     }
     private void Update()
     {
@@ -35,12 +43,18 @@ public class LaserShot : NetworkBehaviour
             DestroySelf();
         }
     }
+
     [ServerCallback]
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
         if (hitInfo.gameObject.CompareTag("Enemy"))
         {
+            DeadExplosion();
             NetworkServer.Destroy(hitInfo.gameObject);
+            //GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().addScore();
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().addScore();
+       // adds.GetComponent<Player>().addScore();
+            Debug.Log("ASDASDSA");
         }
        // NetworkServer.Destroy(gameObject);
       
@@ -52,8 +66,9 @@ public class LaserShot : NetworkBehaviour
         {
             //    game.score++;
             // GameManager.instance.score++;
-        //GameObject hitD=   Instantiate(impactEffect, collision.gameObject.transform);
-        //    NetworkServer.Spawn(hitD);
+            //GameObject hitD=   Instantiate(impactEffect, collision.gameObject.transform);
+            //    NetworkServer.Spawn(hitD);
+           
             NetworkServer.Destroy(collision.gameObject);
             DestroySelf();
         }

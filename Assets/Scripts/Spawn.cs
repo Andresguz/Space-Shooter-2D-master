@@ -27,7 +27,7 @@ public class Spawn : NetworkBehaviour
     {
         if (hasAuthority)
         {
-            timeS += 1f * Time.deltaTime;
+            timeS += 1.5f * Time.deltaTime;
             // Debug.Log(timeS);
             timeS2 = Random.RandomRange(2f, 5f);
             if (activo)

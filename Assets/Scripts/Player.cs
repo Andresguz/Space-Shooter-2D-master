@@ -7,38 +7,41 @@ using UnityEngine.UI;
 public class Player : NetworkBehaviour
 {
     private float _speed;
-   [SyncVar] public int ScoreP;
+   [SyncVar] public int ScoreP=0;
     public int numPlayer;
-
-
-    void Start()
+    private SpriteRenderer m_SpriteRenderer;
+    public void Start()
     {
- 
-       
-        
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        //Set the GameObject's Color quickly to a set Color (blue)
+      
     }
+
+    
     [ClientRpc]
-  public void scoreSearch()
+  public void scoreSearch(int i)
     {
-        GameObject sc = GameObject.FindGameObjectWithTag("score0");
+        GameObject sc = GameObject.FindGameObjectWithTag("score"+numPlayer);
         sc.GetComponent<Text>().text = ScoreP.ToString();
     }
-    [ServerCallback]
+    [Server]
     public void addScore()
     {
         ScoreP++;
+        scoreSearch(ScoreP);
     }
     void Update()
     {
         ShipMovement();
         Boundaries();
-        scoreSearch();
-        if (Input.GetButtonDown("Fire1") )
+        if (numPlayer == 0)
         {
-      //   addScore();
+            m_SpriteRenderer.color = Color.yellow;
         }
-  
-
+        if (numPlayer == 1)
+        {
+            m_SpriteRenderer.color = Color.red;
+        }
     }
 
     void Boundaries()
@@ -77,13 +80,5 @@ public class Player : NetworkBehaviour
 
 
     }
-
-
-    
-    //public void AddScore(int points)
-    //{
-    //    _score += points;
-    //    _uiManager.UpdateScore(_score);
-    //}
 
 }

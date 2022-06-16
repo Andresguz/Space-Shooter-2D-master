@@ -58,8 +58,6 @@ public class Enemy : NetworkBehaviour
             {
             _animator.SetBool("f", true);
               DeadExplosion();
-            
-            
                 _enemySpeed = 0;
             NetworkServer.Destroy(gameObject);
             }
@@ -67,15 +65,15 @@ public class Enemy : NetworkBehaviour
 
             if (other.tag == "Laser")
             {
-       //  GameObject.Find("Player(Clone)").GetComponent<Player>().addScore();
-         GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().addScore();
+
+      
+      //   GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().addScore();
               DeadExplosion();
             NetworkServer.Destroy(other.gameObject);
              
           
                 //  _animator.SetTrigger("OnEnemyDeath"); //trigger anim
                 _enemySpeed = 0;
-                // _explSrc.Play();
                 Destroy(this.gameObject, 2.5f);
             }
 
